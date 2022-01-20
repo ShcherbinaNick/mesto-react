@@ -1,0 +1,11 @@
+.header__logo {
+  display: block;
+  margin: 0 0 41px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header__logo {
+    width: 104px;
+    margin: 0 0 31px 27px;
+  }
+}
