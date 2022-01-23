@@ -30,10 +30,10 @@ function ImagePopup(props) {
   }, [ card, onClose ])
 
   return (
-    <article className={ `popup popup_type_image ${ card ? "popup_active" : "" }` }>
+    <article className={ `popup popup_type_image ${ card.link !== '' ? "popup_active" : "" }` }>
       <figure className="popup__figure">
         <button type="button" aria-label="закрыть" className="popup__close-button" onClick={ onClose }></button>
-        <img src={ link } alt="картинка пользователя" className="popup__figure-image" />
+        <img src={ link ? link: '' } alt={`карточка с названием ${ name }`} className="popup__figure-image" />
         <figcaption className="popup__figure-title">{ name } </figcaption>
       </figure>
     </article>
