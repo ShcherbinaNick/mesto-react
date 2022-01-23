@@ -10,7 +10,7 @@ function Card({ cardData, onCardClick }) {
   return (
     <li className="card">
       <div className="card__image-container">
-        <img src={ link } alt="фото достопримечательности" className="card__image" onClick={ handleCardClick }/>
+        <img src={ link } alt={`карточка с названием ${ name }`} className="card__image" onClick={ handleCardClick }/>
       </div>
       <button type="button" aria-label="удалить" className="card__delete"></button>
       <div className="card__text">
