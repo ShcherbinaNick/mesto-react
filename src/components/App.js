@@ -6,6 +6,8 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 
 function App() {
@@ -46,9 +48,25 @@ function App() {
     setSelectedCard({ name: '', link: ''});
   }
 
+  const handleUpdateUser = (newUserInfo) => {
+    api.setUserInfo(newUserInfo)
+      .then((newData) => {
+        setCurrentUser(newData);
+        closeAllPopups();
+      })
+  }
+
+  const handleUpdateAvatar = (avatar) => {
+    api.setAvatar(avatar)
+      .then((newAvatar) => {
+        setCurrentUser(newAvatar);
+        closeAllPopups();
+      })
+  }
+
   useEffect(() => {
     api.getUserInfo()
-      .then(err => setCurrentUser(err))
+      .then(res => setCurrentUser(res))
   }, [])
 
   return (
@@ -62,16 +80,10 @@ function App() {
                 onCardClick={ handleCardClick } 
           />
           <Footer />
-          <PopupWithForm name="avatar-edit" title="Обновить аватар" isOpen={ isEditAvatarPopupOpen } onClose={ closeAllPopups } >
-          <input type="url" name="profile-edit-avatar" className="popup__input popup__input_field_avatar" id="field_avatar" placeholder="Ссылка" required />
-          <span className="popup__input-error popup__input-error_field_avatar"></span>
-          </PopupWithForm>
-          <PopupWithForm name="profile-edit" title="Редактировать профиль" isOpen={ isEditProfilePopupOpen } onClose={ closeAllPopups } >
-            <input type="text" name="profile-input-name" className="popup__input popup__input_field_name " id="field_name" placeholder="Имя" minLength="2" maxLength="40" required />
-            <span className="popup__input-error popup__input-error_field_name"></span>
-            <input type="text" name="profile-input-description" className="popup__input popup__input_field_description " id="field_description" placeholder="Род деятельности" minLength="2" maxLength="200" required />
-            <span className="popup__input-error popup__input-error_field_description"></span>
-          </PopupWithForm>
+
+          <EditAvatarPopup isOpen={ isEditAvatarPopupOpen } onClose={ closeAllPopups } onUpdateAvatar={ handleUpdateAvatar } />
+          <EditProfilePopup isOpen={ isEditProfilePopupOpen } onClose={ closeAllPopups } onUpdateUser={ handleUpdateUser } />
+
           <PopupWithForm name="card_delete" title="Вы уверены?" buttonText="Да">
           </PopupWithForm>
           <PopupWithForm name="new-card" title="Новое место" isOpen={ isAddPlacePopupOpen } onClose={ closeAllPopups } >

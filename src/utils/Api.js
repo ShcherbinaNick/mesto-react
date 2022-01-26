@@ -23,8 +23,8 @@ class Api{
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        name: userData["profile-input-name"],
-        about: userData["profile-input-description"]
+        name: userData.name,
+        about: userData.about
       })
     })
     .then(this._onResponse)
