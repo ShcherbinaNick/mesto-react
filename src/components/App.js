@@ -48,7 +48,7 @@ function App() {
 
   useEffect(() => {
     api.getUserInfo()
-      .then(r => setCurrentUser(r))
+      .then(err => setCurrentUser(err))
   }, [])
 
   return (

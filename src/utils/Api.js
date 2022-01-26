@@ -46,6 +46,19 @@ class Api{
     })
     .then(this._onResponse)
   }
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._url}/cards/likes/${cardId}`, {
+        method: "DELETE",
+        headers: this._headers,
+      }).then(this._onResponse)
+    } else {
+      return fetch(`${this._url}/cards/likes/${cardId}`, {
+        method: "PUT",
+        headers: this._headers,
+      }).then(this._onResponse)
+    }
+  }
   removeCardLike(cardId) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: "DELETE",
