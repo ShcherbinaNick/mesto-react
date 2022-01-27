@@ -23,7 +23,10 @@ function PopupWithForm({ name, title, buttonText="Сохранить", children,
     }
 
   }, [ isOpen, onClose ])
-
+  
+  // Спасибо за замечания, беру в работу. Также мне хочется исправить положение кнопки, как это было в приложении без реакта, но на данный момент
+  // поджимает дедлайн, поэтому я пока просто удалю.
+  
   return (
     <>
       <article className={`popup popup_type_${ name } ${isOpen ? "popup_active" : "" }` }>
@@ -31,7 +34,7 @@ function PopupWithForm({ name, title, buttonText="Сохранить", children,
           <button type="button" aria-label="закрыть" className="popup__close-button" onClick={ onClose }></button>
           <h2 className="popup__title">{ title }</h2>
           { children }
-          <button className="popup__save-button popup__save-button_disabled" type="submit"> { buttonText }</button>
+          <button className="popup__save-button" type="submit"> { buttonText }</button>
         </form>
       </article>
     </>
